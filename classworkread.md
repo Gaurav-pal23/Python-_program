@@ -1,1 +1,25 @@
+#write a program to create a list of any 10 numbers and sort hem in decending order without use any libraby mwthod for sorrting
+numbers = [12, 5, 8, 19, 3, 15, 7, 1, 10, 6]
+
+# create a list of 10 numbers
+numbers = [12, 5, 8, 19, 3, 15, 7, 1, 10, 6]
+
+# sorting in descending order
+for i in range(len(numbers)):
+    for j in range(i + 1, len(numbers)):
+        if numbers[i] < numbers[j]:
+            temp = numbers[i]
+            numbers[i] = numbers[j]
+            numbers[j] = temp
+# for print 
+print("Numbers in descending order:", numbers)
+
+output:-
+Numbers in descending order: [19, 15, 12, 10, 8, 7, 6, 5, 3, 1]
+
+
+
+
+
+
 
