@@ -1,0 +1,23 @@
+# to create Custom Exception Class
+class AgeException(Exception):
+    pass
+
+# -------------------------------
+# --- main Program -------------
+
+try:
+    age = int(input("Enter age (in year) : "))
+
+    # -------------------------------
+    if (age < 0):
+        raise AgeException()
+    elif (age < 18):
+        print("Not eligible for vote")
+    else:
+        print("Eligible for vote")
+
+except ValueError:
+    print("Unexpected data type")
+
+except AgeException:
+    print("Age cannot be negative")
