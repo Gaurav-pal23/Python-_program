@@ -1,0 +1,67 @@
+def calculate_grade(percentage):
+    if percentage >= 90:
+        return 'A'
+    elif percentage >= 75:
+        return 'B'
+    elif percentage >= 50:
+        return 'C'
+    else:
+        return 'D'
+
+
+students = []
+top_score = -1
+
+try:
+    with open("students.csv", "r") as file:
+        next(file)  # skip header
+
+        for line in file:
+            try:
+                data = line.strip().split(",")
+
+                if len(data) != 5:
+                    raise ValueError("Invalid row format")
+
+                sid, name, m1, m2, m3 = data
+
+                # Convert marks safely
+                m1 = int(m1)
+                m2 = int(m2)
+                m3 = int(m3)
+
+                total = m1 + m2 + m3
+                percentage = total / 3
+
+                grade = calculate_grade(percentage)
+
+                student = {
+                    "id": sid,
+                    "name": name,
+                    "total": total,
+                    "percentage": percentage,
+                    "grade": grade
+                }
+
+                students.append(student)
+
+                # Track topper
+                if total > top_score:
+                    top_score = total
+
+            except Exception as e:
+                print(f"Skipping invalid row: {line.strip()} | Error: {e}")
+
+except FileNotFoundError:
+    print("File not found!")
+
+# Output results
+print("\nStudent Results:")
+for s in students:
+    print(f"{s['name']} -> Total: {s['total']}, %: {s['percentage']:.2f}, Grade: {s['grade']}")
+
+# Find toppers
+print("\nTopper(s):")
+for s in students:
+    if s["total"] == top_score:
+        print(f"{s['name']} with {s['total']} marks")
